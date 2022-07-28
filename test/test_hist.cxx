@@ -74,11 +74,11 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -113,11 +113,11 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -155,11 +155,13 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -196,11 +198,13 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -233,11 +237,11 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -269,11 +273,11 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -289,7 +293,7 @@ int main() {
     spdlog::info("Hist test8: 1D hist, test read value --- Pass");
   }
 
-    {
+  {
     spdlog::info("Hist test9: 1D hist, test read value/flow --- Test");
 
     YAML::Node node = YAML::Load(R"(
@@ -298,7 +302,7 @@ int main() {
       uniform_bins: [ 10, 0, 1 ]
       name: "mytitle"
     content:
-      has_flow_bins: true,
+      has_flow_bins: true
       values: [ -1, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, -1 ] 
     
     )");
@@ -309,11 +313,11 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({}) = {}, expected {}", x, hist.at(x).value(), y);    \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -344,9 +348,9 @@ int main() {
       uniform_bins: [ 3, 0, 3 ]
       name: "mytitle"
     content:
-      values: [ 1 ,2 ,3
-                4 ,5 ,6
-                7 ,8 ,9 ]
+      values: [ 1, 2, 3,
+                4, 5, 6,
+                7, 8, 9, ]
     )");
 
     auto hist = nuis::hist::make_hist(node);
@@ -355,11 +359,13 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }
@@ -369,7 +375,15 @@ int main() {
       for (int i = 0; i < 5; ++i) {
 
         std::tuple<int, int> indx{i - 1, j - 1};
-        fillTST(indx, ctr++);
+
+        double expected = 0;
+        if ((i == 4) || (j == 4) || (i == 0) || (j == 0)) {
+          expected = 0;
+        } else {
+          expected = ctr++;
+        }
+
+        fillTST(indx, expected);
       }
     }
 
@@ -391,14 +405,13 @@ int main() {
     -
       uniform_bins: [ 3, 0, 3 ]
       name: "mytitle"
-    content: { 
-      has_flow_bins: true,
-      values: -1, -1,-1,-1, 99, 
-              -1, 1 ,2 ,3 , 99,
-              -1, 4 ,5 ,6 , 99,
-              -1, 7 ,8 ,9 , 99,
-              99, 99,99,99, 99 ]
-            }
+    content: 
+      has_flow_bins: true
+      values: [ -1, -1, -1, -1, 99, 
+                -1, 1 , 2 , 3 , 99,
+                -1, 4 , 5 , 6 , 99,
+                -1, 7 , 8 , 9 , 99,
+                99, 99, 99, 99, 99 ]
     )");
 
     auto hist = nuis::hist::make_hist(node);
@@ -407,11 +420,13 @@ int main() {
 
 #define fillTST(x, y)                                                          \
   {                                                                            \
-    bool tst_pass = (hist.at(x).value() == y);                                         \
+    bool tst_pass = (hist.at(x).value() == y);                                 \
     if (tst_pass) {                                                            \
-      spdlog::info("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::info("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     } else {                                                                   \
-      spdlog::warn("\tax({}) = {}, expected {}", #x, hist.at(x).value(), y);   \
+      spdlog::warn("\tax({},{}) = {}, expected {}", std::get<0>(x),            \
+                   std::get<1>(x), hist.at(x).value(), y);                     \
     }                                                                          \
     pass = pass && tst_pass;                                                   \
   }

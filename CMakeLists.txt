@@ -117,6 +117,8 @@ CPMFindPackage(
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
+
+include(CTest)
 add_subdirectory(test)
 
 

@@ -50,16 +50,12 @@ inline hist make_hist(YAML::Node const &hist_descriptor) {
       hist_descriptor["content"]["errors"].as<std::vector<double>>(
           std::vector<double>{});
 
-  auto has_flow_bins =
-      bool(hist_descriptor["content"]["has_flow_bins"])
-          ? hist_descriptor["content"]["has_flow_bins"].as<std::string>()
-          : "";
-
-  spdlog::critical("has_flow_bins: {}", has_flow_bins);
+  bool has_flow_bins =
+      hist_descriptor["content"]["has_flow_bins"].as<bool>(false);
 
   size_t ctr = 0;
   for (auto &&x :
-       indexed(rtn, (has_flow_bins=="true") ? boost::histogram::coverage::all
+       indexed(rtn, has_flow_bins ? boost::histogram::coverage::all
                                   : boost::histogram::coverage::inner)) {
     if (ctr >= values.size()) {
       std::stringstream ss("");
