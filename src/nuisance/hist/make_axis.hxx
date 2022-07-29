@@ -1,21 +1,12 @@
 #pragma once
 
-#include "boost/histogram.hpp"
+#include "nuisance/hist/types.hxx"
 
 #include "yaml-cpp/yaml.h"
 
 namespace nuis {
 
 namespace hist {
-
-struct metadata {
-  std::string name;
-  std::string units;
-};
-
-using axis_regular = boost::histogram::axis::regular<>;
-using axis_variable = boost::histogram::axis::variable<>;
-using axis = boost::histogram::axis::variant<axis_regular, axis_variable>;
 
 /*
  * Constructs a nuis::hist::axis from a YAML descriptor of the format
@@ -82,6 +73,20 @@ inline axis make_axis(YAML::Node const &axis_descriptor) {
   }
 
   throw 1;
+}
+
+inline axis make_axis(std::string const &name, std::string const &units,
+                      std::vector<std::array<double, 2>> const &bins) {
+
+  if (!bins.size()) {
+    throw;
+  }
+
+  std::vector<double> bin_edges = {bins.front()[0]};
+  std::for_each(bins.begin(), bins.end(),
+                [&](auto const &v) { bin_edges.push_back(v[1]); });
+  return axis_variable(bin_edges.begin(), bin_edges.end(),
+                       name + "%20" + units);
 }
 
 } // namespace hist
